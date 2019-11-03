@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Youtube</title>
+    <title>Betoyou</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,18 +21,24 @@
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <a href="#" class="btn btn-lg navbar-brand">
-                        <i class="fa fa-youtube glyphicon fa-lg"></i>
+                    <a href="#" class="btn btn-lg navbar-brand" id="headerMenu">
+                        <i class="fa fa-bars glyphicon fa-lg"></i>
+                    </a>
+                    <a href="#" class="navbar-brand title">Betoyou</a>
+                    
+                    <li class="navbar-brand nav" id="login" style="display: none;"><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+                    <a href="#" class="btn navbar-brand" id="searchSeccondButton" style="display: none" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
                     </a>
                 </div>
+
+                
             
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav title">
-                        <li><a href="#">Youtube</a></li>
-                    </ul>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
+                    
+                    <form class="navbar-form navbar-left searchInput" role="search">
+                        <div class="form-group" id="search">
                             <input type="text" class="form-control" placeholder="Search">
                         </div>
                         <a href="#" class="btn" type="submit">
@@ -41,9 +47,9 @@
                     </form>
 
                     <!-- right -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" id="iconRight">
                         <li><a href="#"><span class="glyphicon glyphicon-facetime-video"></span> Video up</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="loginScreen.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -58,7 +64,7 @@
                 <div class="row">
 
                     <!-- left menu -->
-                    <div class="col-lg-2 leftMenu">
+                    <div class="col-lg-2 leftMenu" id="leftMenu">
                         <a href="" style="display: block" ><i class="fa fa-home fa-lg"></i> Home</a> 
                         <a href="" style="display: block" ><i class="fa fa-info fa-lg"></i> About</a> 
                         <a href="" style="display: block" ><i class="fa fa-fire fa-lg"></i> Service</a> 
@@ -119,8 +125,11 @@
             </div>
         </div>
 
+        
+        
+        
 
     </div>
-    
+    <script src="../utils/menuToggle.js"></script>
 </body>
 </html>
