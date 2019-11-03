@@ -1,0 +1,77 @@
+*{
+    
+}
+
+nav.navbar.navbar-default.navbar-fixed-top {
+    border: none;
+    padding: 5px 0px;
+}
+
+form.navbar-form.navbar-left .form-control {width: 600px;margin-left: 60px;}
+
+.collapse.navbar-collapse.navbar-ex1-collapse {
+    padding-right: 30px;
+}
+
+.navbar-right span.glyphicon {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    top: 3px;
+    padding-right: 20px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: black;
+    font-size: 16px;
+}
+
+.navbar-default .title>li>a {
+    font-size: 27px;
+    font-weight: 700;
+    color: black;
+    padding-left: 5px;
+}
+
+a.btn.btn-lg.navbar-brand {
+    color: black;
+    padding-left: 25px;
+}
+
+.col-lg-2.leftMenu a {
+    color: black;
+    font-size: 18px;
+}
+
+.col-lg-2.leftMenu i {
+    margin-right: 25px;
+    margin: 10px;
+    width: 25px;
+    height: 25px;
+    text-align: center
+}
+
+.col-lg-2.leftMenu {margin-top: 28px;}
+
+.row.sectionRow {padding: 0px 4px;}
+
+.contentWrapper h3 {
+    margin: 10px 0px;
+}
+
+.contentWrapper p {
+    color: grey;
+    margin-bottom: 3px;
+}
+
+.col-xs-12.col-sm-6.col-md-3 a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.contentWrapper .col-xs-12.col-sm-6.col-md-3 {
+    padding: 5px;
+    margin-bottom: 20px;
+}
