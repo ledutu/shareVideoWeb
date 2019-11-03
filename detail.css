@@ -1,0 +1,27 @@
+*{
+    
+}
+
+a {
+    font-weight: 700;
+}
+
+img.img-circle {
+    width: 79%;
+    margin-left: 22px;
+    margin-top: -5px;
+}
+
+h3#id-title-video{
+    color: red;
+    font-size: 29px;
+}
+
+p {}
+
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: block;
+}
