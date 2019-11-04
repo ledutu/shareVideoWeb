@@ -1,54 +1,45 @@
 var checkToggleMenu = true;
-$(document).ready(function(){
-    $("#headerMenu").click(function(){
-        if(checkToggleMenu)
-        {
+$(document).ready(function () {
+    $("#headerMenu").click(function () {
+        if (checkToggleMenu) {
             updateChangeMenuHiding();
-            console.log("hello")
         }
-        else
-        {
-            updateChangeMenuShowing();            
-            console.log("hello")
+        else {
+            updateChangeMenuShowing();
         }
     });
 
-    $(window).resize(function(){
+    $(window).resize(function () {
         var width = $(window).width();
-        if(width < 1260)
-        {
+        if (width < 1260) {
             $("#search").hide();
             updateChangeMenuHiding();
-            
+
         }
-        else
-        {
+        else {
             $("#search").show();
             updateChangeMenuShowing();
         };
 
-        if(width < 700)
-        {
+        if (width < 700) {
             $("#login").show()
             $("#searchSeccondButton").show();
         }
-        else
-        {
+        else {
             $("#login").hide();
             $("#searchSeccondButton").hide();
         }
     })
 });
 
-function updateChangeMenuShowing()
-{
+function updateChangeMenuShowing() {
     $("#leftMenu").show();
     $(".content").removeClass("col-lg-12");
     $(".content").addClass("col-lg-10");
     checkToggleMenu = true;
 };
 
-function updateChangeMenuHiding(){
+function updateChangeMenuHiding() {
     $("#leftMenu").hide();
     $(".content").removeClass("col-lg-10");
     $(".content").addClass("col-lg-12");
