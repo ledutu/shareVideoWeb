@@ -96,7 +96,14 @@
 
                 <?php 
                     require_once('about.php');
-                    require_once('contact.php')
+                    require_once('contact.php');
+                    require_once("../../utils/conn.php");
+                    $sql = "SELECT * FROM video";
+                    $result = $conn->query($sql);
+                    if($result->num_rows == 0)
+                    {
+                        echo "connect successful";
+                    }
                 ?>
             </div>
         </div>
