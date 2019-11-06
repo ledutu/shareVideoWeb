@@ -7,7 +7,9 @@
             </a>
             <a href="#" class="navbar-brand title">Betoyou</a>
             
-            <li class="navbar-brand nav" id="login" style="display: none;"><a href="#"><span class="glyphicon glyphicon-log-in"></span></a></li>
+            <li class="navbar-brand nav" id="login" style="display: none;">
+                <a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span></a>
+            </li>
             <a href="#" class="btn navbar-brand" id="searchSeccondButton" style="display: none" type="submit">
                 <span class="glyphicon glyphicon-search"></span>
             </a>
@@ -27,7 +29,7 @@
 
             <!-- right -->
             <ul class="nav navbar-nav navbar-right" id="iconRight">
-                <li><a href="#"><span class="glyphicon glyphicon-facetime-video"></span> Video up</a></li>
+                <li><a href="../upload/upload.php"><span class="glyphicon glyphicon-facetime-video"></span> Video up</a></li>
                 <li><a href="../register/register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li><a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
