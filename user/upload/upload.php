@@ -24,7 +24,7 @@
                     <p>Upload videos directly to our Betoyou channel</p>
                 </div>
 
-                <form action="" method="POST" role="form">
+                <form action="uploadVideo.php" method="POST" role="form" enctype="multipart/form-data">
                 
                     <div class="form-group">
                         <input type="text" class="form-control" id="title" name="title" placeholder="Video Title" required>
@@ -37,7 +37,7 @@
 
                     <div class="form-group">
                         
-                        <select name="" id="input" class="form-control" required="required">
+                        <select name="category" id="input" class="form-control" required="required">
                             <option value="">Choose video category</option>
                             <option value="music">Music</option>
                             <option value="film">film</option>
@@ -46,7 +46,7 @@
                         </select>
                         
                     </div>
-                
+
                     <div class="form-group">
                         <input type="file" class="form-control" id="file" name="file" placeholder="Click to select a video file" required>
                     </div>

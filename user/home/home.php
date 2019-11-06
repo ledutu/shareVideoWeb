@@ -39,6 +39,8 @@
                         <a href="" style="display: block" ><i class="fa fa-video-camera fa-lg"></i> Film</a> 
                         <a href="" style="display: block" ><i class="fa fa-circle fa-lg"></i> Sport</a> 
                         <a href="" style="display: block" ><i class="fa fa-caret-down fa-lg"></i> Other</a> 
+                        <hr>
+                        <a href="" style="display: block" ><i class="fa fa-users fa-lg"></i> My videos</a>
                     
                     </div>  <!-- finish left menu -->
                     
@@ -47,17 +49,12 @@
                         <div class="container">
 
                             <!-- create item wrapper -->
-                            <?php
-                            $category = array("Musics", "Films", "Sports", "Other");
-                            for($i=0; $i < 4; $i++)
-                            {
-                            ?>
                             <div class="row">
                                 
                                 <div class="row sectionRow">
                                     
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <h2><?php echo $category[$i] ?></h2>
+                                        <h2>Music</h2>
                                     </div>
 
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
@@ -65,34 +62,42 @@
                                     </div>
 
                                 </div>
-
+                                
                                 <!-- to create 8 items -->
                                 <?php
-                                for($j=0; $j<8; $j++)
-                                {
+                                    require_once("../conn.php");
+                                    $sql = "SELECT * FROM video";
+                                    $result = $conn->query($sql);
+                                    if($result->num_rows > 0){
+                                        while($row = $result->fetch_assoc()){
+                                
                                 ?>
+
+                                
                                 <div class="col-xs-12 col-sm-6 col-md-3">
                                     <a href="../detail/detail.php">
                                         <div class="item">
-                                            <img src="https://picsum.photos/id/<?php echo $i*10+$j+10 ?>/600/600" alt="Image" class="img-responsive">
-                                            <h3><a href="">Tran danh hay nhat lich su</a></h3>
-                                            <p>Nguoi dang</p>
-                                            <p style="float: left">160N Luot xem - </p>
-                                            <p>1 nam truoc</p>
+                                            <video width="100%">
+                                                <source src="../../uploads/<?php echo $row["file"] ?>" type="video/mp4">
+                                            </video>
+                                            <h3><a href=""><?php echo $row["title"] ?></a></h3>
+                                            <p><?php echo $row["user"] ?></p>
+                                            <p style="float: left"><?php echo $row["view"]?> Lượt xem - <?php echo $row["date"] ?></p>
                                         </div>
                                     </a>
                                 </div>
                                 <?php
-                                }
+
+                                        }
+                                    }
                                 ?>
                                 
                             </div>  <!-- End row -->
-                            <?php
-                            }
-                            ?>
                         </div>  <!-- End container -->
                     </div>  <!-- End content -->
                 </div>  <!-- End contentWrapper -->
+
+                
 
                 <?php 
                     require_once('about.php');
