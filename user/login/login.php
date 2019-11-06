@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,19 +29,19 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form>
+				<form action="" method="POST" class="form-signin">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="username">
+						<input type="text" name="username" class="form-control" placeholder="username">
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="password">
+						<input type="password" name="password" class="form-control" placeholder="password">
 					</div>
 					<div class="row align-items-center remember">
 						<input type="checkbox">Remember Me
@@ -48,6 +49,21 @@
 					<div class="form-group">
 						<input type="submit" value="Login" class="btn float-right loginButton">
 					</div>
+					<?php
+						if (isset($_POST["username"]) && isset($_POST["password"])) {
+							$username = $_POST["username"];
+							$password = $_POST["password"];
+							$sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+							require_once("../conn.php");
+							$result = $conn->query($sql);
+							if ($result->num_rows > 0) {
+								$_SESSION["username"] = $username;
+								header("Location: ../home/home.php");
+							} else {
+								echo "Login Failed";
+							}
+						}
+					?>
 				</form>
 			</div>
 			<div class="card-footer">
