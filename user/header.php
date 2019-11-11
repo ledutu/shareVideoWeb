@@ -1,6 +1,10 @@
+<?php
+  session_start();
+
+?>
 <div class="header"> 
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
+
         <div class="navbar-header">
             <a href="#" class="btn btn-lg navbar-brand" id="headerMenu">
                 <i class="fa fa-bars glyphicon fa-lg"></i>
@@ -15,7 +19,6 @@
             </a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             
             <form class="navbar-form navbar-left searchInput" role="search">
@@ -27,12 +30,49 @@
                 </a>
             </form>
 
+            <?php
+                if(!isset($_SESSION["username"]))
+                {
+                  
+            ?>
             <!-- right -->
             <ul class="nav navbar-nav navbar-right" id="iconRight">
                 <li><a href="../upload/upload.php"><span class="glyphicon glyphicon-facetime-video"></span> Video up</a></li>
                 <li><a href="../register/register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li><a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+
+            <?php
+                }
+                else
+                {
+            ?>
+            
+            <ul class="nav navbar-nav navbar-right" id="avatar">
+                <li>
+                    <img src="<?php echo $_SESSION["image"] ?>" width="" class="img-circle avt" alt="Image">
+                </li>
+                <li><a href="../logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+
+            <?php
+                }
+            ?>
+
         </div><!-- /.navbar-collapse -->
     </nav>
 </div>  <!-- finish header menu -->
+
+
+<style>
+
+    img.img-circle.avt {
+        width: 40px;
+        margin-top: 5px
+    }
+
+</style>
+
+
+
+

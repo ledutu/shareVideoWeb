@@ -75,14 +75,14 @@
 
                                 
                                 <div class="col-xs-12 col-sm-6 col-md-3">
-                                    <a href="../detail/detail.php">
+                                    <a href="../detail/detail.php?id=<?php echo $row["videoId"] ?>">
                                         <div class="item">
                                             <video width="100%">
                                                 <source src="../../uploads/<?php echo $row["file"] ?>" type="video/mp4">
                                             </video>
                                             <h3><a href=""><?php echo $row["title"] ?></a></h3>
                                             <p><?php echo $row["user"] ?></p>
-                                            <p style="float: left"><?php echo $row["view"]?> Lượt xem - <?php echo $row["date"] ?></p>
+                                            <p><?php echo $row["view"]?> Lượt xem - <?php echo $row["date"] ?></p>
                                         </div>
                                     </a>
                                 </div>

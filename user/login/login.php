@@ -1,4 +1,6 @@
-
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,13 +53,19 @@
 					</div>
 					<?php
 						if (isset($_POST["username"]) && isset($_POST["password"])) {
+							require_once("../conn.php");
 							$username = $_POST["username"];
 							$password = $_POST["password"];
 							$sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
-							require_once("../conn.php");
+							
 							$result = $conn->query($sql);
 							if ($result->num_rows > 0) {
 								$_SESSION["username"] = $username;
+								while($row = $result->fetch_assoc())
+								{
+									if($row["username"] == $username)
+										$_SESSION["image"] = $row["userImage"];
+								}
 								header("Location: ../home/home.php");
 							} else {
 								echo "Login Failed";
