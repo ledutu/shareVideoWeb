@@ -1,10 +1,11 @@
 <?php
+	session_start();
+
 	require_once("../conn.php");
-    
-    $user = "ledutu";
+    $user = $_SESSION["username"];
 	$title = $_POST["title"];
 	$category = $_POST["category"];
-	$view = 20;
+	$view = 0;
     $date = date("Y/m/d");
     $description = $_POST["description"];
 	
@@ -13,7 +14,7 @@
     $target_dir = "../../uploads/";
 	$target_file = $target_dir . $_FILES["file"]["name"];
 	
-    $maxsize = 5242880000; // 50MB
+    $maxsize = 524288000000; // 500MB
     
     // Select file type
     $videoFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -26,7 +27,7 @@
         
         // Check file size
         if(($_FILES['file']['size'] >= $maxsize) || ($_FILES["file"]["size"] == 0)) {
-            echo "File too large. File must be less than 5MB.";
+            echo "File too large. File must be less than 500MB.";
         }else{
             // Upload
             if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){

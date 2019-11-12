@@ -1,5 +1,5 @@
 *{
-    
+
 }
 
 #login a {
@@ -63,12 +63,13 @@ a.btn.btn-lg.navbar-brand {
     text-align: center
 }
 
-.col-lg-2.leftMenu {margin-top: 28px;}
+.col-lg-2.leftMenu {margin-top: 28px;} */
 
 .row.sectionRow {padding: 0px 4px;}
 
 .contentWrapper h3 {
     margin: 10px 0px;
+    
 }
 
 .contentWrapper p {
@@ -86,4 +87,9 @@ a.btn.btn-lg.navbar-brand {
 .contentWrapper .col-xs-12.col-sm-6.col-md-3 {
     padding: 5px;
     margin-bottom: 20px;
+    height: 300px;
+}
+
+.application{
+    margin-bottom: 100px
 }

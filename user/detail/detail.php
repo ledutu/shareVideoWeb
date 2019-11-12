@@ -21,8 +21,10 @@
         require_once("../conn.php");
 
         $videoId = $_GET["id"];
+        $category = $_GET["category"];
 
-        $sql = "SELECT * FROM video WHERE videoId = $videoId";
+        $sql = "SELECT * FROM video, user WHERE video.videoId = $videoId AND video.user = user.username";
+
 
     ?>
 
@@ -37,6 +39,7 @@
                         <?php
                         
                         $result = $conn->query($sql);
+
                         if($result->num_rows > 0){
                             while($row = $result->fetch_assoc()){
                         ?>
@@ -93,11 +96,11 @@
                                         
                                             <div class="row author">
                                                 <div class="col-xs-3 col-lg-1">
-                                                    <img id="img-channel" src="https://picsum.photos/600/600/?ramdom" class="img-circle" alt="Cinque Terre" >
+                                                    <img id="img-channel" src="<?php echo $row["userImage"] ?>" class="img-circle" alt="Cinque Terre" >
                                                 </div>
                                                 <div class="col-xs-6 col-lg-9">
-                                                    <a><?= $row["userId"] ?></a>
-                                                    <p>100&nbsp;T người đăng ký </p>
+                                                    <a><?= $row["user"] ?></a>
+                                                    <p><?= $row["subscribers"] ?> người đăng ký </p>
                                                 </div>
                                                 <div class="col-xs-2 col-lg-1">
                                                     <button id="subscribe" type="button" class="btn btn-danger">ĐĂNG KÝ</button>
@@ -110,7 +113,7 @@
                                     <div class="row">
                                         <div class="col-xs-10 col-xs-push-1">
                                             <span class="more">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                                <?php echo $row['description'] ?>
                                             </span>
                                         </div>
                                     </div>
@@ -174,25 +177,39 @@
                     <div class="col-xs-12 col-lg-4">
                         <!-- div 2 -->             
                         <?php
-                        for($i = 0; $i<9; $i++)
+                        if(isset($_GET["category"]))
                         {
+                            $category = $_GET["category"];
+                            echo $category;
+                            $sqlCategory = "SELECT * FROM video WHERE category = $category";
+                        }
+                        $resultCategory = $conn->query($sqlCategory);
+
+                        if($resultCategory){
+                            while($row2 = $resultCategory->fetch_assoc()){
+                                echo $row2["user"];
                         ?>
+
                         <div class="thumbnail">
 
-                        <a href="https://www.youtube.com/watch?v=_dK2tDK9grQ">
-                            <div class="row">
-                                <div class="col-xs-6 col-lg-6">
-                                    <img src="https://picsum.photos/id/<?php echo $i*20 ?>/600/600" alt="Lights" style="width:100%">
+                            <a href="">
+                                <div class="row">
+                                    <video width="100%">
+                                        <source src="../../uploads/<?php echo $row2["file"] ?>" type="video/mp4">
+                                    </video>
+                                    <div class="col-xs-6 col-lg-6">
+                                        
+                                        <h3><a href=""><?php echo $row["title"] ?></a></h3>
+                                        <p><?php echo $row2["user"] ?></p>
+                                        <p><?php echo $row2["view"]?> Lượt xem - <?php echo $row2["date"] ?></p>
+                                    </div>
                                 </div>
-                                <div class="col-xs-6 col-lg-6">
-                                    <h3>Hãy Trao Cho Anh</h3>
-                                    <p>Sơn Tùng M-TP</p>
-                                    <p>1.6&nbsp;T lượt xem</p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+
                         </div> 
+
                         <?php
+                            }
                         }
                         ?>
                          <!-- End div 2 -->

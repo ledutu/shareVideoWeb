@@ -9,7 +9,7 @@
             <a href="#" class="btn btn-lg navbar-brand" id="headerMenu">
                 <i class="fa fa-bars glyphicon fa-lg"></i>
             </a>
-            <a href="#" class="navbar-brand title">Betoyou</a>
+            <a (href="home.php" href="../home/home.php") class="navbar-brand title">Betoyou</a>
             
             <li class="navbar-brand nav" id="login" style="display: none;">
                 <a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span></a>
@@ -49,6 +49,7 @@
             ?>
             
             <ul class="nav navbar-nav navbar-right" id="avatar">
+                <li><a href="../upload/upload.php"><span class="glyphicon glyphicon-facetime-video"></span> Video up</a></li>
                 <li>
                     <img src="<?php echo $_SESSION["image"] ?>" width="" class="img-circle avt" alt="Image">
                 </li>
