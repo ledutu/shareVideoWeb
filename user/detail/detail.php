@@ -180,23 +180,28 @@
                         if(isset($_GET["category"]))
                         {
                             $category = $_GET["category"];
-                            echo $category;
-                            $sqlCategory = "SELECT * FROM video WHERE category = $category";
+                            $sqlCategory = "SELECT * FROM video WHERE category = '$category' ORDER BY RAND() LIMIT 8 ";
                         }
                         $resultCategory = $conn->query($sqlCategory);
 
-                        if($resultCategory){
+                        if($resultCategory->num_rows > 0){
                             while($row2 = $resultCategory->fetch_assoc()){
-                                echo $row2["user"];
+                                if($row2["videoId"] !== $videoId)
+                                {
                         ?>
 
                         <div class="thumbnail">
 
-                            <a href="">
+                            <a href="detail.php?id=<?= $row2['videoId']?>&category=<?= $row2['category'] ?>">
                                 <div class="row">
-                                    <video width="100%">
-                                        <source src="../../uploads/<?php echo $row2["file"] ?>" type="video/mp4">
-                                    </video>
+                                    <div class="col-xs-6 col-lg-6">
+
+                                        <video width="100%">
+                                            <source src="../../uploads/<?php echo $row2["file"] ?>" type="video/mp4">
+                                        </video>
+
+                                    </div>
+
                                     <div class="col-xs-6 col-lg-6">
                                         
                                         <h3><a href=""><?php echo $row["title"] ?></a></h3>
@@ -209,6 +214,7 @@
                         </div> 
 
                         <?php
+                                }
                             }
                         }
                         ?>

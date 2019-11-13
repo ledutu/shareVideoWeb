@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Betoyou</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="home.css?version=51" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -77,14 +77,16 @@
                                 ?>
 
                                 
-                                <div class="col-xs-12 col-sm-6 col-md-3 item">
+                                <div class="col-sm-6 col-md-3">
                                     <a href="../detail/detail.php?id=<?php echo $row["videoId"] ?>&category=<?php echo $row["category"] ?>">
-                                        <div class="">
-                                        
+                                        <div class="item">
+                                            
                                             <video width="100%">
                                                 <source src="../../uploads/<?php echo $row["file"] ?>" type="video/mp4">
                                             </video>
-                                            <h3><a href=""><?php echo $row["title"] ?></a></h3>
+                                            <div class="videoTitle">
+                                                <h3><a href=""><?php echo $row["title"] ?></a></h3>
+                                            </div>
                                             <p><?php echo $row["user"] ?></p>
                                             <p><?php echo $row["view"]?> Lượt xem - <?php echo $row["date"] ?></p>
 
