@@ -77,9 +77,9 @@
                                 ?>
 
                                 
-                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="col-xs-12 col-sm-6 col-md-3 item">
                                     <a href="../detail/detail.php?id=<?php echo $row["videoId"] ?>&category=<?php echo $row["category"] ?>">
-                                        <div class="item">
+                                        <div class="">
                                         
                                             <video width="100%">
                                                 <source src="../../uploads/<?php echo $row["file"] ?>" type="video/mp4">
