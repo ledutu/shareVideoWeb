@@ -1,6 +1,12 @@
 <?php
     session_start();
+
+    if(!isset($_SESSION["username"]))
+    {
+        header("Location: login.php");
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +42,7 @@
                         <li class="active"><a data-toggle="tab" href="#home">All Videos  <span class="badge"><?= $result->num_rows ?></span></a></li>
                         <li><a data-toggle="tab" href="#pending">Pending  <span class="badge"><?= $resultComfirm->num_rows ?></span></a></li>
                     </ul>
+                    <a href="logout.php"><button class="btn btn-danger">Logout</button></a>
 
                     <div class="tab-content">
 
@@ -124,6 +131,7 @@
                                 <?php
                                         }
                                     }
+                                    
                                 ?>
 
                                 </tbody>
