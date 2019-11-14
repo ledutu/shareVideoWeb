@@ -17,51 +17,117 @@
 </head>
 <body>
     <div class="application">
+        <?php
+            require_once("../user/conn.php");
+            $sql = "SELECT * FROM video";
+
+            $result = $conn->query($sql);
+
+            $videoComfirm = "SELECT * FROM videoComfirm";
+
+            $resultComfirm = $conn->query($videoComfirm);
+        ?>
 
         <div class="container">
             <div class="row">
                 <div class="col-xs-10 col-xs-push-1">
                     <h2>VIDEOS</h2>
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#home">All Videos</a></li>
-                        <li><a data-toggle="tab" href="#pending">Pending</a></li>
+                        <li class="active"><a data-toggle="tab" href="#home">All Videos  <span class="badge"><?= $result->num_rows ?></span></a></li>
+                        <li><a data-toggle="tab" href="#pending">Pending  <span class="badge"><?= $resultComfirm->num_rows ?></span></a></li>
                     </ul>
 
                     <div class="tab-content">
 
-                        <div id="home" class="tab-pane fade in active">
-                            <table>
+                        <div id="home" class="tab-pane fade in active allVideoTable">
+                            
+                            <table class="table table-hover ">
                                 <thead>
                                     <tr>
-                                        <td>Video</td>
-                                        <td>Title</td>
-                                        <td>Description</td>
-                                        <td>category</td>
-                                        <td>Options</td>
+                                        <th>Video</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Category</th>
+                                        <th>Uploaded</th>
+                                        <th>Options</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
+
+                                <?php
+                                    if($result->num_rows > 0){
+                                        while($row = $result->fetch_assoc()){
+                                ?>
+
                                     <tr>
                                         <td>
-                                            <video width="50%">
-                                                <source src="../uploads/video1.mp4" type="video/mp4">
+                                            <video width="100px">
+                                                <source src="../uploads/<?= $row["file"] ?>" type="video/mp4">
                                             </video>
                                         </td>
-                                        <td>Phim hanh dong</td>
-                                        <td>Tap 900</td>
-                                        <td>Film</td>
+                                        <td><?= $row["title"] ?></td>
+                                        <td><?= $row["description"] ?></td>
+                                        <td><?= $row["category"] ?></td>
+                                        <td><?= $row["date"] ?></td>
                                         <td>
-                                            <button class="btn btn-primary">Delete</button>
+                                            <a href="videoDeleted.php?id=<?= $row["videoId"] ?>"><button class="btn btn-danger">Delete</button></a>
                                         </td>
                                     </tr>
+                                <?php
+                                        }
+                                    }
+                                ?>
                                 </tbody>
                             </table>
+                            
                         </div>
 
+
+                        <!-- Comfirm video from admin -->
                         <div id="pending" class="tab-pane fade">
-                            <h3>Menu 1</h3>
-                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <table class="table table-hover pendingTable">
+                                <thead>
+                                    <tr>
+                                        <th>Video</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>category</th>
+                                        <th>Uploaded</th>
+                                        <th>Options</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                <?php
+                                    if($resultComfirm->num_rows > 0){
+                                        while($comfirm = $resultComfirm->fetch_assoc()){
+                                ?>
+
+                                    <tr>
+                                        <td>
+                                            <video width="100px">
+                                                <source src="../uploads/<?= $comfirm["file"] ?>" type="video/mp4">
+                                            </video>
+                                        </td>
+                                        <td><?= $comfirm["title"] ?></td>
+                                        <td><?= $comfirm["description"] ?></td>
+                                        <td><?= $comfirm["category"] ?></td>
+                                        <td><?= $comfirm["date"] ?></td>
+                                        <td>
+                                            <a href="videoComfirm.php?id=<?= $comfirm["videoId"] ?>"><button class="btn btn-primary">Comfirm</button></a>
+                                            <a href="videoComfirm.php?deleted=<?= $comfirm["videoId"] ?>"><button class="btn btn-danger">Delete</button></a>
+                                        </td>
+                                    </tr>
+
+                                <?php
+                                        }
+                                    }
+                                ?>
+
+                                </tbody>
+                            </table>
                         </div>
 
                     </div>

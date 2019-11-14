@@ -32,7 +32,7 @@
             // Upload
             if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
                 // Insert record
-                $sql = "INSERT INTO video (user, title, category, view, date, description, file)
+                $sql = "INSERT INTO videoComfirm (user, title, category, view, date, description, file)
 			    VALUES ('$user', '$title', '$category', $view, '$date', '$description', '$file_name')";
 
                 mysqli_query($conn, $sql);
