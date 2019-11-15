@@ -1,4 +1,6 @@
-
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +43,7 @@
                         <a href="home.php?category=sport" style="display: block" ><i class="fa fa-circle fa-lg"></i> Sport</a> 
                         <a href="home.php?category=other" style="display: block" ><i class="fa fa-caret-down fa-lg"></i> Other</a> 
                         <hr>
-                        <a href="" style="display: block" ><i class="fa fa-users fa-lg"></i> My videos</a>
+                        <a href="myVideo.php" style="display: block" ><i class="fa fa-users fa-lg"></i> My videos</a>
                     
                     </div>  <!-- finish left menu -->
                     
@@ -69,11 +71,17 @@
                                         $category = $_GET["category"];
                                         $sql = $sql . " WHERE category = '$category'";
                                     }
+                                    else if(isset($_GET["user"]))
+                                    {
+                                        $username = $_GET["user"];
+                                        $sql = $sql . " WHERE user = '$username'";
+                                    }
+                                    
 
                                     $result = $conn->query($sql);
                                     if($result->num_rows > 0){
                                         while($row = $result->fetch_assoc()){
-                                
+                                            
                                 ?>
 
                                 

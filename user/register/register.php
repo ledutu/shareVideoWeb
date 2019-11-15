@@ -68,24 +68,20 @@
                     <?php
 						if(isset($_POST['submit']))
 						{
-							$i = 1;
 							require_once("../conn.php");
 							$sqlSize = "SELECT * FROM user";
 							$result = $conn->query($sqlSize);
-							if($result->num_rows > 0)
-								while($row = $result->fetch_assoc())
-									$i++;
 
 							$userRegister = $_POST['userRegister'];
 							$passRegister = $_POST['passRegister'];
 							$emailRegister = $_POST['emailRegister'];
-							$image = "https://picsum.photos/id/" . (100+$i) . "/600/600";
+							$image = "https://picsum.photos/id/" . (100+$result->num_rows+1) . "/600/600";
 							$subscribers = 0;
 
-							$userId = "user" . $i;
+							$userId = "user" . ($result->num_rows+1);
 
-							$sql = "INSERT INTO user(userId, username,password,email, userImage ,subscribers) 
-									VALUES ('$userId','$userRegister','$passRegister','$emailRegister','$image', $subscribers)"; 
+							$sql = "INSERT INTO user(userId, username,password,email, userImage) 
+									VALUES ('$userId','$userRegister','$passRegister','$emailRegister','$image')"; 
 							
 
 							if ($conn->query($sql) === FALSE) {

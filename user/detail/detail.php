@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +28,11 @@
 
         $sql = "SELECT * FROM video, user WHERE video.videoId = $videoId AND video.user = user.username";
 
+        $commentCounting = "SELECT * FROM comment WHERE videoId = $videoId";
+
+        $sqlSizeCmt = "SELECT * FROM comment";
+
+        $cmtSize = $conn->query($sqlSizeCmt);
 
     ?>
 
@@ -51,39 +59,19 @@
                         <!-- infoVideo -->  
                         <div class="infoVideo">
                             <div class="title-video">
-                                <h3 id="id-title-video"><?= $row["title"] ?></h3>
+                                <h3 style="float: left" id="id-title-video"><?= $row["title"] ?></h3>
+                                
                             </div>
                             <div class="view">
                                 <div class="row" id="view-like">
                                     <div class="col-lg-8">
                                         <p id="view"><?= $row["view"] ?> Lượt xem</p>
-                                    </div>
-                                    <div class="col-xs-12 col-lg-4">
-                                        <div class="row">
-                                            <div class="col-xs-2 col-lg-2">
-                                                <a id="like" href="#" class="btn btn btn-lg">
-                                                    <i class="fa fa-thumbs-o-up">
-                                                        <p><?= $row["like"] ?></p>
-                                                    </i> 
-                                                </a>    
-                                            </div>    
-                                            <div class="col-xs-2 col-lg-2">
-                                                <a id="unlike" href="#" class="btn btn btn-lg">
-                                                    <i class="fa fa-thumbs-o-down">
-                                                        <p><?= $row["dislike"] ?></p>
-                                                    </i> 
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-3 col-lg-3">
-                                                <a href="#" class="btn btn btn-lg">
-                                                    <i class="fa fa-share">
-                                                        <p>SHARE</p>
-                                                    </i> 
-                                                </a>
-                                            </div>
-                                            
-                                        </div>
-                                    </div> 
+                                        <a href="#" class="btn btn btn-lg">
+                                            <i class="fa fa-share">
+                                                <p>SHARE</p>
+                                            </i> 
+                                        </a>
+                                    </div>  
                                 </div>
                                 <hr>
                             </div>
@@ -100,24 +88,17 @@
                                                 </div>
                                                 <div class="col-xs-6 col-lg-9">
                                                     <a><?= $row["user"] ?></a>
-                                                    <p><?= $row["subscribers"] ?> người đăng ký </p>
-                                                </div>
-                                                <div class="col-xs-2 col-lg-1">
-                                                    <button id="subscribe" type="button" class="btn btn-danger">ĐĂNG KÝ</button>
+                                                    <p>
+                                                        <span class="more">
+                                                            <?php echo $row['description'] ?>
+                                                        </span>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>  
                                     </div> 
                                 </div>
-                                <div class="info-more">
-                                    <div class="row">
-                                        <div class="col-xs-10 col-xs-push-1">
-                                            <span class="more">
-                                                <?php echo $row['description'] ?>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div><!-- /info-actor -->
 
                             <hr>
@@ -129,7 +110,7 @@
                                 
                                     <div class="row">
                                         <div class="col-xs-10">
-                                            <p>817.408 bình luận</p>
+                                            <p><?= $cmtSize->num_rows ?> Bình luận</p>
                                         </div>
                                         
                                     </div>
@@ -140,26 +121,82 @@
                                     <div class="row">
 
                                         <div class="col-xs-2 col-lg-1">
-                                            <img id="img-create-comment" src="https://picsum.photos/600/600/?ramdom+2" class="img-circle" alt="Cinque Terre">
+
+                                        <?php if (isset($_SESSION["image"])): ?>
+                                            <img id="img-create-comment" src="<?= $_SESSION["image"] ?>" class="img-circle" alt="Cinque Terre">
+                                        <?php else: ?>
+                                            <img id="img-create-comment" src="http://www.clipartpanda.com/clipart_images/user-66327738/download" class="img-circle" alt="Cinque Terre">
+                                        <?php endif ?>
+                                            
                                         </div>
 
                                         <div class="col-xs-10 col-lg-11">
-                                            <textarea ></textarea>
+                                            
+                                            <form action="" method="POST" role="form" enctype="multipart/form-data">
+                                            
+                                                <div class="form-group" style="float: left; margin-right: 10px">
+                                                    <textarea class="form-control" id="content" name="content"></textarea>
+                                                </div>
+                                            
+                                                <button type="submit" class="btn btn-primary">Post</button>
+                                            </form>
+
+                                            <?php
+
+                                                if(isset($_POST["content"]))
+                                                {
+                                                    $content = $_POST["content"];
+                                                    if(isset($_SESSION["username"]) || isset($_SESSION["image"]))
+                                                    {
+                                                        $username = $_SESSION["username"];
+                                                        $image = $_SESSION["image"];
+                                                        $date = date("Y/m/d");
+                                                        $com = "cmt" . ($cmtSize->num_rows+1);
+
+                                                        $comment = "INSERT INTO comment(id, videoId, username, userImage,content, date)
+                                                                    VALUES('$com',$videoId, '$username', '$image', '$content', '$date')";
+
+                                                        if($conn->query($comment) === false)
+                                                        {
+                                                            die("Error: " . $comment . $conn->error);
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "Bạn chưa đăng nhập";
+                                                    }
+                                                }
+                                            ?>
+                                            
                                         </div>
                                         
                                     </div>
                                 </div>
                                 <br>
+                                
                                 <!-- read-comment -->
+                                <?php
+                                    $commentResults = $conn->query($commentCounting);
+                                    if($commentResults->num_rows > 0){
+                                        while($commentRow = $commentResults->fetch_assoc()){
+                                ?>
+
                                 <div class="read-comment">
                                     <div class="col-xs-2 col-lg-1">
-                                        <img id="img-read-comment"src="https://picsum.photos/600/600/?ramdom+1" class="img-circle" alt="Cinque Terre">
+                                        <img id="img-read-comment"src="<?= $commentRow["userImage"] ?>" class="img-circle" alt="Cinque Terre">
                                     </div>
                                     <div class="col-xs-10 col-lg-11">
-                                        <a>Trần Dần</a>
-                                        <p>Đệ nhất quốc sư Hoa Kỳ</p>
+                                        <a><?= $commentRow["username"] ?></a>
+                                        <p><?= $commentRow["content"] ?></p>
+                                        <p>Ngày đăng: <?= $commentRow["date"] ?></p>
                                     </div>
                                 </div> <!-- /comment -->
+
+                                <?php
+                                        }
+                                    }
+                                ?>
+
                             </div>
                             
         
@@ -207,6 +244,7 @@
                                         <h3><a href=""><?php echo $row["title"] ?></a></h3>
                                         <p><?php echo $row2["user"] ?></p>
                                         <p><?php echo $row2["view"]?> Lượt xem - <?php echo $row2["date"] ?></p>
+
                                     </div>
                                 </div>
                             </a>
@@ -224,6 +262,7 @@
             </div>
         </div>
     </div>
+
     <script src="detail.js"></script>
     
 </body>

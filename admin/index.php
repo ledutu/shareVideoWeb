@@ -41,8 +41,9 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#home">All Videos  <span class="badge"><?= $result->num_rows ?></span></a></li>
                         <li><a data-toggle="tab" href="#pending">Pending  <span class="badge"><?= $resultComfirm->num_rows ?></span></a></li>
+                        <a href="logout.php"><button class="btn btn-danger">Logout</button></a>
                     </ul>
-                    <a href="logout.php"><button class="btn btn-danger">Logout</button></a>
+                    
 
                     <div class="tab-content">
 
