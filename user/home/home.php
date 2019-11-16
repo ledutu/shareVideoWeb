@@ -64,22 +64,22 @@
                                 
                                 <?php
                                     require_once("../conn.php");
-                                    $sql = "SELECT * FROM video";
+                                    $sql = "SELECT * FROM video ORDER BY view DESC";
 
                                     if(isset($_GET["category"]))
                                     {
                                         $category = $_GET["category"];
-                                        $sql = $sql . " WHERE category = '$category'";
+                                        $sql = "SELECT * FROM video WHERE category = '$category' ORDER BY view DESC";
                                     }
                                     else if(isset($_GET["user"]))
                                     {
                                         $username = $_GET["user"];
-                                        $sql = $sql . " WHERE user = '$username'";
+                                        $sql = "SELECT * FROM video WHERE user = '$username' ORDER BY view DESC";
                                     }
                                     else if(isset($_POST["text"]))
                                     {
                                         $text = $_POST["text"];
-                                        $sql = $sql . " WHERE title LIKE '%$text%'";
+                                        $sql = "SELECT * FROM video WHERE title LIKE '%$text%' ORDER BY view DESC";
                                     }
                                     
 

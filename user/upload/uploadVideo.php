@@ -5,7 +5,6 @@
     $user = $_SESSION["username"];
 	$title = $_POST["title"];
 	$category = $_POST["category"];
-	$view = 0;
     $date = date("Y/m/d");
     $description = $_POST["description"];
 	
@@ -32,8 +31,8 @@
             // Upload
             if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
                 // Insert record
-                $sql = "INSERT INTO videoComfirm (user, title, category, view, date, description, file)
-			    VALUES ('$user', '$title', '$category', $view, '$date', '$description', '$file_name')";
+                $sql = "INSERT INTO videoComfirm (user, title, category, date, description, file)
+			    VALUES ('$user', '$title', '$category', '$date', '$description', '$file_name')";
 
                 mysqli_query($conn, $sql);
                 header("Location: ../home/home.php");

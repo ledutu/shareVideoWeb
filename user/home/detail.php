@@ -30,9 +30,11 @@
 
         $commentCounting = "SELECT * FROM comment WHERE videoId = $videoId";
 
-        $sqlSizeCmt = "SELECT * FROM comment";
+        $view = "UPDATE video SET view = (view + 1) WHERE videoId = $videoId";
 
-        $cmtSize = $conn->query($sqlSizeCmt);
+        $conn->query($view);
+
+        
 
     ?>
 
@@ -59,18 +61,12 @@
                         <!-- infoVideo -->  
                         <div class="infoVideo">
                             <div class="title-video">
-                                <h3 style="float: left" id="id-title-video"><?= $row["title"] ?></h3>
-                                
+                                <h3 id="id-title-video"><?= $row["title"] ?></h3>
                             </div>
                             <div class="view">
                                 <div class="row" id="view-like">
                                     <div class="col-lg-8">
                                         <p id="view"><?= $row["view"] ?> Lượt xem</p>
-                                        <a href="#" class="btn btn btn-lg">
-                                            <i class="fa fa-share">
-                                                <p>SHARE</p>
-                                            </i> 
-                                        </a>
                                     </div>  
                                 </div>
                                 <hr>
@@ -106,16 +102,6 @@
                             <!-- comment -->
                             <div class="comment">
                             
-                                <div class="info-comment">
-                                
-                                    <div class="row">
-                                        <div class="col-xs-10">
-                                            <p><?= $cmtSize->num_rows ?> Bình luận</p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-
                                 <div class="create-comment">
 
                                     <div class="row">
@@ -217,7 +203,7 @@
                         if(isset($_GET["category"]))
                         {
                             $category = $_GET["category"];
-                            $sqlCategory = "SELECT * FROM video WHERE category = '$category' ORDER BY RAND() LIMIT 8 ";
+                            $sqlCategory = "SELECT * FROM video WHERE category = '$category' ORDER BY view DESC LIMIT 8 ";
                         }
                         $resultCategory = $conn->query($sqlCategory);
 
