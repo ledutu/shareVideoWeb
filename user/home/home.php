@@ -76,6 +76,11 @@
                                         $username = $_GET["user"];
                                         $sql = $sql . " WHERE user = '$username'";
                                     }
+                                    else if(isset($_POST["text"]))
+                                    {
+                                        $text = $_POST["text"];
+                                        $sql = $sql . " WHERE title LIKE '%$text%'";
+                                    }
                                     
 
                                     $result = $conn->query($sql);
@@ -86,7 +91,7 @@
 
                                 
                                 <div class="col-sm-6 col-md-3">
-                                    <a href="../detail/detail.php?id=<?php echo $row["videoId"] ?>&category=<?php echo $row["category"] ?>">
+                                    <a href="detail.php?id=<?php echo $row["videoId"] ?>&category=<?php echo $row["category"] ?>">
                                         <div class="item">
                                             
                                             <video width="100%">
@@ -126,6 +131,7 @@
             </div>
         </div>
     </div>
-    <script src="../../utils/menuToggle.js"></script>
+    
+    <script src="../../utils/menuToggle.js?version=51"></script>
 </body>
 </html>

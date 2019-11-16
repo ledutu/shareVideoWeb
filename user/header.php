@@ -10,24 +10,41 @@
                 <i class="fa fa-bars glyphicon fa-lg"></i>
             </a>
             <a (href="home.php" href="../home/home.php") class="navbar-brand title">Betoyou</a>
-            
-            <li class="navbar-brand nav" id="login" style="display: none;">
-                <a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span></a>
-            </li>
-            <a href="#" class="btn navbar-brand" id="searchSeccondButton" style="display: none" type="submit">
-                <span class="glyphicon glyphicon-search"></span>
-            </a>
-        </div>
 
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <?php
+                if(!isset($_SESSION["username"]))
+                {
+                  
+            ?>
+                <li class="navbar-brand nav" id="login" style="display: none;">
+                    <a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span></a>
+                </li>
+            <?php
+                }
+                
+            ?>
             
-            <form class="navbar-form navbar-left searchInput" role="search">
-                <div class="form-group" id="search">
-                    <input type="text" class="form-control" placeholder="Search">
+            <form action="home.php" action="../home/home.php" method="POST" role="form" class="navbar-brand nav" style="display:none;" id="miniSearch" enctype="multipart/form-data">
+            
+                <div class="form-group" style="float: left;">
+                    <input type="text" class="form-control" id="text" placeholder="Search">
                 </div>
-                <a href="#" class="btn" type="submit">
+            
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+        
+        </div>
+        
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse" >
+            
+            <form class="navbar-form navbar-left searchInput" action="home.php" method="POST" role="form" enctype="multipart/form-data">
+                <div class="form-group" id="search">
+                    <input type="text" id="text" name="text" class="form-control" placeholder="Search">
+                </div>
+                <button class="btn" type="submit">
                     <span class="glyphicon glyphicon-search"></span>
-                </a>
+                </button>
             </form>
 
             <?php
@@ -51,7 +68,7 @@
             <ul class="nav navbar-nav navbar-right" id="avatar">
                 <li><a href="../upload/upload.php"><span class="glyphicon glyphicon-facetime-video"></span> Video up</a></li>
                 <li>
-                    <img src="<?php echo $_SESSION["image"] ?>" width="" class="img-circle avt" alt="Image">
+                    <img src="<?php echo $_SESSION["image"] ?>" width="40px" class="img-circle avt" alt="Image">
                 </li>
                 <li><a href="../logout.php"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>

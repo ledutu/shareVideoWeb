@@ -22,11 +22,13 @@ $(document).ready(function () {
         };
 
         if (width < 700) {
-            $("#login").show()
+            $("#login").show();
             $("#searchSeccondButton").show();
+            $("#miniSearch").show();
         }
         else {
             $("#login").hide();
+            $("#miniSearch").hide();
             $("#searchSeccondButton").hide();
         }
     })
